@@ -1,0 +1,27 @@
+name: 4VRS Vosk
+version: "0.1.0"
+slug: fourvrs_vosk
+description: Offline Vosk speech recognition for Home Assistant via Wyoming
+url: https://github.com/dk-1983/4vrs-vosk-addon
+arch:
+  - amd64
+startup: application
+boot: auto
+init: true
+timeout: 60
+ports:
+  10301/tcp: 10301
+ports_description:
+  10301/tcp: Wyoming speech recognition
+map:
+  - type: share
+    read_only: false
+options:
+  model: vosk-model-ru-0.42
+  auto_download: true
+  log_level: info
+schema:
+  model: list(vosk-model-ru-0.42|vosk-model-small-ru-0.22|vosk-model-small-en-us-0.15|vosk-model-en-us-0.22)
+  auto_download: bool
+  log_level: list(debug|info|warning|error)
+watchdog: tcp://[HOST]:[PORT:10301]

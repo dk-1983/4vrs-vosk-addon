@@ -1,0 +1,12 @@
+configuration:
+  model:
+    name: Recognition model
+    description: ru-0.42 is the full Russian model tested with the intercom. Small models use less memory but can recognize differently. English models are also available. The HA recognizer language must match the model.
+  auto_download:
+    name: Download missing model
+    description: Download the selected model from Alpha Cephei on first start. Models are kept in /share/fourvrs_vosk/models and survive app updates. Disable this for a manually copied model.
+  log_level:
+    name: Log level
+    description: Diagnostic detail. Speech text and audio are never written to the app log, including debug mode.
+network:
+  10301/tcp: Wyoming STT port for Home Assistant. Local network only; not an authenticated internet endpoint.

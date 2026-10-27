@@ -1,0 +1,6 @@
+*
+!app/
+!app/*.py
+!licenses/
+!licenses/*
+!Dockerfile

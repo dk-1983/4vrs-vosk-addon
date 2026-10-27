@@ -1,0 +1,38 @@
+name: Vosk app checks
+on:
+  push:
+    paths:
+      - addons/fourvrs_vosk/**
+      - repository.yaml
+      - .github/workflows/vosk-addon.yaml
+  pull_request:
+    paths:
+      - addons/fourvrs_vosk/**
+      - repository.yaml
+      - .github/workflows/vosk-addon.yaml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build app
+        run: docker build -t fourvrs-vosk:check addons/fourvrs_vosk
+      - name: Test app and bilingual options
+        run: docker run --rm -v "$PWD:/project:ro" -w /project/addons/fourvrs_vosk --entrypoint python3 fourvrs-vosk:check -m unittest discover -s tests -v
+      - name: Validate Supervisor configuration
+        run: |
+          docker run --rm -v "$PWD:/project:ro" --entrypoint python3 ghcr.io/home-assistant/amd64-hassio-supervisor:latest -c '
+          import yaml
+          from pathlib import Path
+          try:
+              from supervisor.apps.validate import SCHEMA_APP_CONFIG as CONFIG, SCHEMA_APP_TRANSLATIONS as TRANSLATIONS
+          except ImportError:
+              from supervisor.addons.validate import SCHEMA_ADDON_CONFIG as CONFIG, SCHEMA_ADDON_TRANSLATIONS as TRANSLATIONS
+          root=Path("/project/addons/fourvrs_vosk")
+          CONFIG(yaml.safe_load((root/"config.yaml").read_text()))
+          for path in (root/"translations").glob("*.yaml"):
+              TRANSLATIONS(yaml.safe_load(path.read_text()))
+          print("Supervisor config and translations: OK")'
