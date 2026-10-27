@@ -64,7 +64,7 @@ class Service:
         self.info = Info(asr=[AsrProgram(name='4vrs-vosk',
             description='Vosk speech recognition; unofficial 4VRS Home Assistant adapter',
             attribution=Attribution(name='Alpha Cephei / Vosk', url='https://alphacephei.com/vosk/'),
-            installed=True, version='0.1.0', models=[AsrModel(name=model_name,
+            installed=True, version='0.1.1', models=[AsrModel(name=model_name,
                 description=model_name, attribution=Attribution(name='Alpha Cephei',
                     url='https://alphacephei.com/vosk/models'), installed=True,
                 version=None, languages=[language])])]).event()

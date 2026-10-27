@@ -12,7 +12,7 @@ from models import MODELS, options
 class ManifestTests(unittest.TestCase):
     def test_options_and_bilingual_configuration_match(self):
         config=yaml.safe_load((ROOT/'config.yaml').read_text())
-        self.assertEqual(config['version'],'0.1.0')
+        self.assertEqual(config['version'],'0.1.1')
         self.assertEqual(set(config['options']),set(config['schema']))
         self.assertEqual(set(config['schema']['model'][5:-1].split('|')),set(MODELS))
         en=yaml.safe_load((ROOT/'translations/en.yaml').read_text())

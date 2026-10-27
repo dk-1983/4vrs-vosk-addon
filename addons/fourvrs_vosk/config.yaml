@@ -1,5 +1,5 @@
 name: 4VRS Vosk
-version: "0.1.0"
+version: "0.1.1"
 slug: fourvrs_vosk
 description: Offline Vosk speech recognition for Home Assistant via Wyoming
 url: https://github.com/dk-1983/4vrs-vosk-addon

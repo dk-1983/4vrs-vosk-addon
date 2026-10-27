@@ -2,7 +2,7 @@
 # Upstream image and its bundled third-party packages retain their licenses.
 FROM rhasspy/wyoming-vosk:1.5.1@sha256:18517f4c588e8b39f3d0a31233e2d97df33eefd729ebc4e51ac03f92b4265299
 ARG BUILD_ARCH=amd64
-ARG BUILD_VERSION=0.1.0
+ARG BUILD_VERSION=0.1.1
 LABEL io.hass.name="4VRS Vosk" \
       io.hass.description="Unofficial Vosk speech recognition app with Wyoming support" \
       io.hass.type="addon" \
